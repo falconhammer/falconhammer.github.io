@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheme Editor</title>
+  </head>
+  <body>
+    <div id="root-container">
+      <div id="command-bar">
+        <button id="run">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-play-icon lucide-play"
+          >
+            <path
+              d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div id="split">
+        <div id="editor" class="pane"></div>
+        <div class="gutter" aria-label="Resize panels" role="separator"></div>
+        <div id="console" class="pane">
+          <p>Console</p>
+          <div id="console-lines"></div>
+        </div>
+      </div>
+    </div>
+    <script src="biwascheme-0.8.3-min.js.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs/loader.js"></script>
+    <script src="https://unpkg.com/hotkeys-js/dist/hotkeys-js.min.js"></script>
+    <script src="monaco.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: none;
+      }
+
+      #root-container {
+        width: 100%;
+        height: 100%;
+        box-sizing: 100%;
+        overflow: hidden;
+      }
+
+      #split {
+        display: grid;
+        grid-template-rows: 1fr 2px 1fr;
+        column-gap: 0px;
+        row-gap: 0px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .pane {
+        overflow: hidden;
+      }
+
+      .gutter {
+        background-color: #2e2e2e;
+        cursor: ns-resize;
+        touch-action: none;
+
+        &:hover {
+          background-color: #3e3e3e;
+        }
+      }
+
+      #command-bar {
+        width: 100%;
+        height: fit-content;
+        background-color: #1e1e1e;
+        padding: 0.2rem;
+
+        & button {
+          background-color: #2e2e2e;
+          color: white;
+          border: none;
+          outline: none;
+          padding: 0.5rem;
+          margin: 0.2rem;
+          line-height: 0;
+          border-radius: 6px;
+
+          &:hover {
+            background-color: #3e3e3e;
+          }
+        }
+      }
+
+      #console {
+        background-color: #1e1e1e;
+
+        p {
+          color: white;
+          padding: 0.5rem;
+          margin: 0;
+          font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Oxygen,
+            Ubuntu,
+            Cantarell,
+            "Open Sans",
+            "Helvetica Neue",
+            sans-serif;
+          border-bottom: 1px solid #2e2e2e;
+        }
+
+        #console-lines {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          padding: 0;
+          overflow-y: auto;
+          max-height: 100%;
+
+          div {
+            color: white;
+            font-family: monospace;
+            padding: 0.2rem;
+          }
+
+          :nth-child(even) {
+            background-color: #2e2e2e;
+          }
+        }
+      }
+    </style>
+  </body>
+</html>
